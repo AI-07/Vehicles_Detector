@@ -42,7 +42,7 @@ def arguments():
     parser = argparse.ArgumentParser(description="Tensorflow object detection module")
     parser.add_argument("--model", dest = 'model', help =
                         "model / name of the model which you want to use for inference",
-                        default = "FasterRCNN", type = str)
+                        default = "FasterRCNN__Inception_V2", type = str)
 
     return parser.parse_args()
 
@@ -65,8 +65,6 @@ PATH_TO_CKPT = os.path.join(CWD_PATH,MODEL_NAME,args.model,'frozen_inference_gra
 # Path to label map file
 PATH_TO_LABELS = os.path.join(CWD_PATH,'annotations','label_map.pbtxt')
 
-# Path to image
-# PATH_TO_IMAGE = os.path.join(CWD_PATH,IMAGE_NAME)
 
 # Number of classes the object detector can identify
 NUM_CLASSES = 6
