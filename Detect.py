@@ -29,6 +29,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import sys
+import time
 
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
@@ -42,7 +43,7 @@ def arguments():
     parser = argparse.ArgumentParser(description="Tensorflow object detection module")
     parser.add_argument("--model", dest = 'model', help =
                         "model / name of the model which you want to use for inference",
-                        default = "FasterRCNN", type = str)
+                        default = "FasterRCNN_Inception_V2", type = str)
 
     return parser.parse_args()
 
@@ -52,7 +53,7 @@ def arguments():
 args = arguments()
 # Name of the directory containing the object detection module we're using
 MODEL_NAME = 'inference_graph'
-IMAGE_LIST = os.listdir(os.path.join(os.getcwd(),"Images"))
+IMAGE_LIST = os.listdir(os.path.join(os.getcwd(),"Images")) #list of all images in 'Images' folder
 
 
 # Grab path to current working directory
@@ -112,8 +113,9 @@ num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 # expand image dimensions to have shape: [1, None, None, 3]
 # i.e. a single-column array, where each item in the column has the pixel RGB value
 indx = 0
-for image in IMAGE_LIST:
-    image = cv2.imread(os.path.join(CWD_PATH,'Images',image))
+for img in IMAGE_LIST:
+    tic = time.time()
+    image = cv2.imread(os.path.join(CWD_PATH,'Images',img))
     image_expanded = np.expand_dims(image, axis=0)
 
     # Perform the actual detection by running the model with the image as input
@@ -122,7 +124,7 @@ for image in IMAGE_LIST:
         feed_dict={image_tensor: image_expanded})
 
     # Draw the results of the detection (aka 'visulaize the results')
-
+    threshold = 0.60
     vis_util.visualize_boxes_and_labels_on_image_array(
         image,
         np.squeeze(boxes),
@@ -131,8 +133,11 @@ for image in IMAGE_LIST:
         category_index,
         use_normalized_coordinates=True,
         line_thickness=1,
-        min_score_thresh=0.60)
+        min_score_thresh=threshold)
 
     # All the results have been drawn on image. Now display the image.
     cv2.imwrite(('Detections/'+'Detected_'+IMAGE_LIST[indx]), image)
+    toc=time.time()
+    Dets = np.sum((scores > threshold))
+    print('Image:',img,"took:",round(toc-tic,3),"secs for detection & Detected:",Dets,"objects") #Time taken for detection
     indx+=1
