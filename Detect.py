@@ -43,11 +43,7 @@ def arguments():
     parser = argparse.ArgumentParser(description="Tensorflow object detection module")
     parser.add_argument("--model", dest = 'model', help =
                         "model / name of the model which you want to use for inference",
-<<<<<<< HEAD
                         default = "FasterRCNN_Inception_V2", type = str)
-=======
-                        default = "FasterRCNN__Inception_V2", type = str)
->>>>>>> 5fc64474f603749d0b57601ec373e56203a36415
 
     return parser.parse_args()
 
