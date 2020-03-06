@@ -31,6 +31,7 @@ import tensorflow as tf
 import sys
 import time
 
+
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
 
@@ -43,7 +44,7 @@ def arguments():
     parser = argparse.ArgumentParser(description="Tensorflow object detection module")
     parser.add_argument("--model", dest = 'model', help =
                         "model / name of the model which you want to use for inference",
-                        default = "FasterRCNN_Inception_V2", type = str)
+                        	default = "FasterRCNN_Inception_V2", type = str)
 
     return parser.parse_args()
 
@@ -138,4 +139,7 @@ for img in IMAGE_LIST:
     toc=time.time()
     Dets = np.sum((scores > threshold))
     print('Image:',img,"took:",round(toc-tic,3),"secs for detection & Detected:",Dets,"objects") #Time taken for detection
+
+    # All the results have been drawn on image. Now display the image.
+    cv2.imwrite(('Detections/'+'Detected_'+IMAGE_LIST[indx]), image)
     indx+=1
