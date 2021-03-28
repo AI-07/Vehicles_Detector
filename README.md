@@ -9,3 +9,5 @@ its name while executing "Detect.py" file by the argument of --model (default se
 
 There are a few shortcomings in this project, since these models are trained (been through transfer learning) on a very small dataset of non-uniformly distributed objects, i.e there were very few images of buses in training dataset, so it does end up sometimes misclassifying buses with other classes.
 SSD_Inception and SSD_MobileNet are comparitively faster models but with very low accuracy, whereas other two models (FasterRCNN_Inception & FasterRCNN_ResNet50) take a bit longer to infer but are much better at accuracy.
+
+Youtube link to working prototype: https://www.youtube.com/watch?v=1BBVFqSXEDI
