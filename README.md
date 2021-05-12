@@ -1,12 +1,13 @@
 # Vehicles_Detector 
 This repository includes different Conv-Net architectures for detection of road-side objects including pedestrians, 
-these Conv-Nets are trained only on 6 classes i.e. Bus, Van, Car, Rickshaw, Bike, and Pedestrians.Images for training are taken 
+these Conv-Nets are fine-tuned on only 6 classes i.e. Bus, Van, Car, Rickshaw, Bike, and Pedestrians.Images for training are captured 
 from a high angle i.e. height of a traffic light pole. So it performs better on high angle images as compared to low angle images.
 The trained models are placed in 'inference_graph' folder by their respective names, one can use any of the given models by parsing 
 its name while executing "Detect.py" file by the argument of --model (default set to Faster-RCNN Inception model)
 
                                               Detect.py --model ssd_mobilenet
 
+Following are the two images which went through the detection process.
 
 ![Detected_147](https://user-images.githubusercontent.com/58001683/117958301-51fae300-b334-11eb-8487-b5fa7505b338.jpeg)
 
